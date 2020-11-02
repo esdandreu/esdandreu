@@ -1,0 +1,576 @@
+\documentclass[
+a4paper,
+12pt,
+]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{pgffor}
+%\usepackage[siunitx]{circuitikz}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[numbers, square]{natbib}
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{soul}
+%\usepackage[framemethod=tikz]{mdframed}
+%\usepackage[shortlabels]{enumitem}
+%\usepackage[version=4]{mhchem}
+\usepackage{makecell, multirow, multicol, tabularx}
+\usepackage{todonotes}
+
+\usepackage{graphicx, caption, subcaption, wrapfig}
+\renewcommand*{\thesubfigure}{\arabic{subfigure}}
+
+\graphicspath{ {./images/} }
+
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+\title{
+\normalfont \normalsize 
+\textsc{
+	Warsaw University of Technology, Poland
+} \\
+\rule{\linewidth}{0.5pt}	\\
+[6pt] 
+\huge T1: Camera Geometry	\\
+}
+\author{Andreu Giménez Bolinches}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+This report and all the resources associated to it can be found in \href{https://gitlab.com/jemaro/wut/computervision/t1-camera-geometry}{gitlab}.
+
+\section{Calibration}
+
+\subsection{Maker and model of the phone/camera used}
+\label{subsec:camera}
+The mobile phone described by \autoref{table:mobile_phone} will be the tool to use as camera to celebrate.
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Maker	& Model	& Release date	\\
+\hline
+OnePlus	& A6010	& November 6, 2018 \\
+\hline
+\end{tabular}
+\caption{Camera used}
+\label{table:mobile_phone}
+\end{table}
+
+In order to decrease the influence of the phone software and increase the workload of the camera calibration, the \emph{Selfie Camera} described by \autoref{table:phone_camera_specs} will be used. Asdf
+\setlength\extrarowheight{7pt}
+\begin{table}[h]
+\begin{tabularx}{\textwidth}{l|l|L}
+\hline
+\multirow{4}{*}{Main Camera}
+    &   \multirow{2}{*}{Dual}
+        &   16 MP, f/1.7, 25mm (wide), 1/2.6", 1.22${\mu}$m, PDAF, OIS	\\	\cline{3-3}
+    &	&   20 MP (16 MP effective), f/1.7, 25mm (wide), 1/2.8", 1.0${\mu}$m, PDAF	\\	\cline{2-3}
+    &   Features
+    	&	Dual-LED flash, HDR, panorama	\\	\cline{2-3}
+    &   Video
+    	&	4K@30/60fps, 1080p@30/60/240fps, 720p@480fps, Auto HDR, gyro-EIS	\\	\cline{2-3}
+\hline
+Selfie Camera
+	&	Single
+		&	16 MP, f/2.0, 25mm (wide), 1/3.06", 1.0${\mu}$m	\\	\cline{2-3}
+	&	Features
+		&	Auto-HDR, gyro-EIS	\\	\cline{2-3}
+	&	Video
+		&	1080p@30fps	\\
+\hline
+\end{tabularx}
+\caption{Phone camera specifications}
+\label{table:phone_camera_specs}
+\end{table}
+
+\subsection{Pattern size}
+\label{subsec:pattern_size}
+Given the situation of not having a printer to print the pattern, a computer screen will be used as the pattern holder. Moreover, at the time of the realization of this exercise, the student didn't had access to any way to physically measure the pattern size on the screen with the necessary accuracy.
+
+Being possible to measure the pattern size in pixels of the screen and having the \href{https://www.samsung.com/latin_en/business/business-monitors/led-ls22d300hy/}{screen specifications}, one can calculate the number of pixels per millimetre that the screen presents and use it to calculate the pattern size. Expressed in \autoref{eqn:pattern_height}.
+
+\begin{equation}
+\label{eqn:pattern_height}
+pattern\_height_{mm} = pattern\_height_{px}*\frac{screen\_height_{mm}}{screen\_height_{px}}
+\end{equation}
+
+As Equations \ref{eqn:screen_diagonal} and \ref{eqn:screen_aspect_ratio} show, the screen specifications summarized in \autoref{table:screen_specifications} provide us the screen height in \emph{pixels} and the necessary parameters to calculate the screen height in \emph{mm} as solved in \autoref{eqn:screen_height}. One can find the derived parameters in \autoref{table:screen_derived_parameters}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c}
+\hline
+\textbf{Height (\emph{pixels})}	
+	& \textbf{Diagonal size (\emph{inches})}
+		& \textbf{Aspect Ratio (width/height)}\\
+\hline
+1080	
+	& 21.5"	
+		& 16/9	\\
+\hline
+\end{tabular}
+\caption{Screen specifications}
+\label{table:screen_specifications}
+\end{table}
+
+\begin{minipage}{0.55\textwidth}
+\centering
+\begin{tabular}{c|c|c}
+\hline
+\textbf{Height (\emph{mm})}	
+	& \textbf{Width (\emph{mm})}	
+		& \textbf{\emph{mm/px}}\\
+\hline
+$267.73$
+	& $475.97$
+		& $0.2479$ \\
+\hline
+\end{tabular}
+\captionof{table}{Screen derived parameters}
+\label{table:screen_derived_parameters}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{equation}
+\label{eqn:screen_diagonal}
+diagonal^2 = width^2 + height^2
+\end{equation}
+\begin{equation}
+\label{eqn:screen_aspect_ratio}
+width/height = 16/9
+\end{equation}
+\begin{equation}
+\label{eqn:screen_height}
+height = \frac{diagonal}{\sqrt{1+(16/9)^2}}
+\end{equation}
+\end{minipage}
+\medskip
+
+
+\begin{wrapfigure}[11]{R}{7cm}
+\centering
+\caption{Pattern height measurement in the screen}
+\label{figure:pattern_height_px}
+\includegraphics[width=7cm]{pattern_height_px.png}
+\end{wrapfigure}
+
+The last missing piece needed to calculate the pattern size as specified in \autoref{eqn:pattern_height} is the pattern height in \emph{pixels}. It has been measured using a \href{file:///C:/Users/esdan/OneDrive/Programs/jruler/JRuler.htm}{screen rule software} as shown in \autoref{figure:pattern_height_px}. One can find the measurements in \emph{pixels} and the respective conversions to \emph{millimeters} in \autoref{table:pattern_measurement}.
+\medskip
+
+\begin{minipage}{0.5\textwidth}
+\centering
+\begin{tabular}{c|c}
+\hline
+\textbf{Pattern Side}	
+	& $\Delta$ \textbf{Uncertainty}	\\
+\hline
+181 \emph{px}
+	& $\pm 1$ \emph{px}	\\
+\hline
+$44.87$ \emph{mm}
+	& $\pm 0.25$ \emph{mm}	\\
+\hline
+\end{tabular}
+\captionof{table}{Calibration pattern measurements}
+\label{table:pattern_measurement}
+\end{minipage}
+
+
+
+\subsection{Picture information}
+
+As mentioned in \autoref{subsec:camera}, the camera used is the \emph{Selfie Camera} with \emph{Video} settings. One can find the specifications of that camera in \autoref{table:phone_camera_specs}. One can also find the summary of the picture information in \autoref{table:picture_information}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c}
+\hline
+\textbf{Resolution (\emph{pixels})}
+	& \textbf{Aspect Ratio (width/height)}	\\
+\hline
+1920 x 1080	
+	& 16/9	\\
+\hline
+\end{tabular}
+\caption{Picture information}
+\label{table:picture_information}
+\end{table}
+
+\subsection{Calibration images}
+\label{subsec:calibration_images}
+Frames from a video of the calibration pattern shown in a screen have been used as calibration images. 100 frames have been extracted using \emph{Matlab} and then manually filtered to omit too blurry images and photos that do not show the full calibration pattern. Leaving a total of 60 images whose miniatures can be observed in \autoref{figure:calibration_miniatures}.
+
+\begin{figure}[h]
+\centering
+\caption{Miniatures of the calibration photos}
+\label{figure:calibration_miniatures}
+\foreach \imageNumber in {1, ..., 60}{
+	\begin{subfigure}{0.1\textwidth}
+		\includegraphics[width=\textwidth]{../../pattern_calibration/\imageNumber.jpg}
+		\caption{}
+	\end{subfigure}
+}
+\end{figure}
+
+\subsection{Calibrator app}
+\label{subsec:calibrator_app}
+Using \emph{Matlab}'s \emph{Calibrator App} with the pattern size calculated in \autoref{subsec:pattern_size} and the images described in \autoref{subsec:calibration_images}.
+
+Several attempts of calibrations with different subsets of the available calibration images lead to similar results. The final subset used will be all the available calibration images except images 31, 32 and 6 because of their high reprojection error. As one can see in \autoref{figure:calibrator_app}, the corrected images show a big distortion in the edges of the images. This is most probable due to the fact that the images are already corrected by the phone software. The calibrator code is then trying to remove the radial distortion of an image that is not radially distorted.
+
+Nevertheless, the camera positions highlighted in \autoref{figure:calibrator_app_camera_positions} match the video recording movement, which is a good indicator for the usage of the calibration for distance measurement purposes, not for distortion reduction.
+
+\begin{figure}[h]
+\caption{\emph{Matlab}'s \emph{Calibrator App}}
+\label{figure:calibrator_app}
+\centering
+\includegraphics[width=16.5cm]{calibrator_app.png}
+\end{figure}
+
+\begin{figure}[h]
+\caption{Calibration camera positions}
+\label{figure:calibrator_app_camera_positions}
+\centering
+\includegraphics[width=12cm]{calibrator_app_camera_positions.png}
+\end{figure}
+
+\subsection{Final camera calibration parameters}
+\label{subsec:calibration_parameters}
+
+One can find the values for camera calibration matrix described in the lectures in \autoref{eqn:intrinsic_camera_parameters}. It includes the uncertainty proposed by the \emph{Calibration App}.
+
+\begin{equation}
+\label{eqn:intrinsic_camera_parameters}
+K_{int}=
+\begin{pmatrix}
+s_x f	& s_{\theta} f	& o_x	\\
+0		& s_y f			& o_y	\\
+0		& 0				& 1		\\
+\end{pmatrix}
+=\begin{pmatrix}
+1901 \pm 3	& 0				& 944.2 \pm 0.8	\\
+0			& 1899 \pm 2	& 531.4 \pm 0.9	\\
+0			& 0				& 1		\\
+\end{pmatrix}
+\end{equation}
+%=\begin{pmatrix}
+%1901		& 0				& 944.2	\\
+%0			& 1899			& 531.4	\\
+%0			& 0				& 1		\\
+%\end{pmatrix}
+
+The calibration was configured to not calculate the \emph{skew factor} ($s_{\theta}$) parameter so it is not surprising that is given as zero. Nevertheless it will not be significant for the next steps developed in \autoref{sec:distance_measurement}.
+
+\clearpage
+
+\section{Distance measurement}
+\label{sec:distance_measurement}
+
+\subsection{Equation used for distance measurement}
+\label{subsec:distance_measurement_equation}
+
+The following derivation will take into account two main assumptions:
+\begin{itemize}
+\item The target is nearly parallel to the camera plane. Which means that the measurement of the target size in millimeters is applied to the same plane that we can measure with pixels in the image. Using the 2D diagram described in \autoref{figure:equation_derivation} the assumption is represented in \autoref{eqn:assumption_parallel}
+
+\begin{equation}
+\label{eqn:assumption_parallel}
+\epsilon \approx 0
+\end{equation}
+
+\item The target is centered in the image. We can state that the line defined by the target side in the image plane (Defined by $u_1$ and $u_2$ in \autoref{figure:equation_derivation}) is very close to the projection of the optical center in the image plane ($c$). Represented with Equations \ref{eqn:assumption_centered_e}, \ref{eqn:assumption_centered_f} and \ref{eqn:assumption_centered_c}.
+
+\begin{minipage}{0.25\textwidth}
+\begin{equation}
+\label{eqn:assumption_centered_e}
+e \approx 0
+\end{equation}
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+\begin{equation}
+\label{eqn:assumption_centered_f}
+f' \approx f
+\end{equation}
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+\begin{equation}
+\label{eqn:assumption_centered_c}
+c' \approx c
+\end{equation}
+\end{minipage}
+
+\end{itemize}
+
+\begin{figure}
+\centering
+\caption{Distance measurement diagram}
+\label{figure:equation_derivation}
+	\begin{subfigure}[b]{0.45\textwidth}
+	\label{figure:equation_derivation_3D}
+	\includegraphics[width=\textwidth]{equation_derivation_3D.png}
+	\caption{3D Representation}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+	\label{figure:equation_derivation_2D}
+	\includegraphics[width=\textwidth]{equation_derivation_2D.png}
+	\caption{2D Projection on the pattern side plane}
+	\end{subfigure}
+\end{figure}
+
+Also note that $a$, $\alpha$ and $\gamma$ are auxiliary variables only useful for the derivation and with no further meaning.
+
+We will begin raising the trigonometric relations that include distance $Z$. Using our auxiliary variables from \autoref{figure:equation_derivation}'s 2D diagram we obtain Equations \ref{eqn:implicit_z_gamma} and \ref{eqn:implicit_z_alpha}. This two can be combined in \autoref{eqn:implicit_z}, in order to remove the auxiliary variable $a$ from the system.
+
+\begin{minipage}{0.4\textwidth}
+\begin{equation}
+\label{eqn:implicit_z_gamma}
+\tan(\gamma)=\frac{D+a}{Z}
+\end{equation}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{equation}
+\label{eqn:implicit_z_alpha}
+\tan(\alpha)=\frac{a}{Z}
+\end{equation}
+\end{minipage}
+
+\begin{equation}
+\label{eqn:implicit_z}
+\tan(\gamma)=\frac{D}{Z}+\tan(\alpha)
+\end{equation}
+
+Then we describe the rest of the auxiliary variables using  known variables, obtaining Equations \ref{eqn:explicit_gamma} and \ref{eqn:explicit_alpha}. Which we combine with \autoref{eqn:implicit_z} to obtain \autoref{eqn:explicit_z}.
+
+\begin{minipage}{0.4\textwidth}
+\begin{equation}
+\label{eqn:explicit_gamma}
+\tan(\gamma)=\frac{\Vert c'-u_{1} \Vert}{f'}
+\end{equation}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{equation}
+\label{eqn:explicit_alpha}
+\tan(\alpha)=\frac{\Vert c'-u_{2} \Vert}{f'}
+\end{equation}
+\end{minipage}
+
+\begin{equation}
+\label{eqn:explicit_z}
+Z = \frac{D f'}{\Vert c'-u_{1} \Vert-\Vert c'-u_{2} \Vert}
+= \frac{D f'}{d}
+\end{equation}
+
+Finally using our assumption  \autoref{eqn:assumption_centered_f} with \autoref{eqn:explicit_z} we obtain \autoref{eqn:distance}. A simple dimensional analysis shows us that the distance to the target $Z$ will be expressed in the same units as the real target size $D$ as long as both the focal length $f$ and the image target size $d$ are expressed in the same units. In our case we use \emph{pixels}.
+
+\begin{equation}
+\label{eqn:distance}
+Z = \frac{D f}{d}
+\end{equation}
+
+\subsubsection{Distance uncertainty propagation}
+\label{subsubsec:distance_error_propagation}
+
+In order to calculate the uncertainty of the distance $Z$ based on the uncertainty of the variables it is dependent ($D$, $d$, and $f$) we will make use of the following uncertainty propagation theory: Let $x$ be a function of experimental quantities, $u$, $v$, etc.
+\begin{equation}
+x=f(u,v, ...)
+\end{equation}
+
+The differential of a function is related to its partial derivatives by \autoref{eqn:differential}.
+
+\begin{equation}
+\label{eqn:differential}
+dx = \frac{\delta x}{\delta u}du + \frac{\delta x}{\delta v}dv +...
+\end{equation}
+
+The differential can be understood as infinitesimal changes in the function, which is similar to the concept of uncertainty. Then one can rewrite \autoref{eqn:differential} as \autoref{eqn:error_propagation}.
+
+\begin{equation}
+\label{eqn:error_propagation}
+\Delta x = \vert \frac{\delta x}{\delta u}\vert \Delta u + \vert \frac{\delta x}{\delta v}\vert \Delta v +...
+\end{equation}
+
+Applying this theory to the distance $Z$ described by \autoref{eqn:distance} we can obtain \autoref{eqn:distance_error}.
+
+\begin{equation}
+\label{eqn:distance_error}
+\Delta Z = \frac{f}{d} \Delta D + \frac{Df}{2d^2} \Delta d + \frac{D}{d} \Delta f
+\end{equation}
+
+\subsection{Pictures of the target pattern}
+\label{subsec:target_pattern}
+
+The target pattern is photographed at three different distances. 50, 100 and 150 cm. Three different frames for each distance are taken in order to make three measurements of the size in \emph{pixels} per distance. One can find miniatures of the used target pattern images in Figures \ref{figure:target_miniatures_50}, \ref{figure:target_miniatures_100} and \ref{figure:target_miniatures_150}. One can also find the measurement results in \autoref{table:target_pattern_measurements}. As dispersion between measurements is smaller than 3\%, using only three measurements per distance is enough.
+
+
+\foreach \distance in {50, 100, 150} {
+	\begin{figure}[h]
+	\centering
+	\caption{Miniatures of the target images from \distance cm}
+	\label{figure:target_miniatures_\distance}
+	\foreach \imageNumber in {1, 2, 3}{
+		\begin{subfigure}{0.25\textwidth}
+		\includegraphics[width=\textwidth]{../../target/\distance cm_\imageNumber.jpg}
+		\caption{}
+		\end{subfigure}
+	}
+	\end{figure}
+}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c||c|c|c||c|c}
+\hline
+Distance (\emph{cm})
+	& M1 (\emph{px})
+		& M2 (\emph{px})
+			& M3 (\emph{px})
+				& Target Size $d$ (\emph{px})
+					& Dispersion (\emph{\%}) \\
+\hline
+\hline
+50	& 262	& 261	& 261	& $261.3 \pm 1$	& 0.4 \\
+\hline
+100	& 141	& 140	& 140	& $140.3 \pm 1$	& 0.7 \\
+\hline
+150	& 96	& 94	& 95	& $95 \pm 1$	& 2.1 \\
+\hline
+\end{tabular}
+\caption{Measurements of the target pattern in the images taken at different distances}
+\label{table:target_pattern_measurements}
+\end{table}
+
+\clearpage
+
+\subsection{Measured target pattern size}
+\label{subsec:target_pattern_size}
+
+%\begin{wrapfigure}[11]{R}{7cm}
+%\centering
+%\caption{Target size measurement in the screen}
+%\label{figure:target_size_px}
+%\includegraphics[width=7cm]{target_size_px.png}
+%\end{wrapfigure}
+
+Following the same procedure described in \autoref{subsec:pattern_size} one can calculate the pattern size of the target image from it's size in the displayed screen. One can see the results in  \autoref{table:target_pattern_size}.
+\medskip
+
+\begin{center}
+\begin{tabular}{c|c}
+\hline
+\textbf{Target Pattern Side ($D$)}	
+	& $\Delta$ \textbf{Uncertainty}	\\
+\hline
+301 \emph{px}
+	& $\pm 1$ \emph{px}	\\
+\hline
+$7.462$ \emph{cm}
+	& $\pm 0.025$ \emph{cm}	\\
+\hline
+\end{tabular}
+\captionof{table}{Target pattern measurement}
+\label{table:target_pattern_size}
+\end{center}
+
+\subsection{Results}
+\label{subsec:results}
+%\subsection{Table with results (measured pattern size in pixels, measured distance to the pattern, calculated distance to the pattern, relative and absolute error)}
+
+For the final calculation we will take one more assumption. Seeing the results of the calibration described by \autoref{eqn:intrinsic_camera_parameters}, we will assume a nearly pinhole model for the scaling coefficients in horizontal direction. Which is represented by \autoref{eqn:assumption_scaling}.
+
+\begin{equation}
+\label{eqn:assumption_scaling}
+s_x \approx 1
+\end{equation}
+
+This assumption lets us extract the focal length $f$ from the calibration matrix as described by \autoref{table:focal_length}.
+
+\begin{center}
+\begin{tabular}{c|c}
+\hline
+\textbf{Focal Length ($f$)}
+	& \textbf{$\Delta$ Uncertainty} \\
+\hline
+$1901$ \emph{px}	& $\pm 3$ \emph{px} \\
+\hline
+\end{tabular}
+\captionof{table}{Focal length, assuming negligible scaling factor effect}
+\label{table:focal_length}
+\end{center}
+
+Using \autoref{eqn:distance} derived on \autoref{subsec:distance_measurement_equation} and the parameters stated in \autoref{subsec:calibration_parameters} and the previous assumption we can calculate the results that can be found on \autoref{table:results}.
+
+The uncertainty of the calculated distance $Z$ has been calculated using \autoref{eqn:distance_error} derived in \autoref{subsubsec:distance_error_propagation}. Being the uncertainty of the real measurement in centimetres of target pattern side $D$ the one defined in \autoref{table:target_pattern_size}. The uncertainty of the image measurement in pixels of the target pattern side $d$ the one defined in \autoref{table:target_pattern_measurements}. Finally, the uncertainty of the focal length $f$ the one given by the \emph{Calibrator App}, that is stated in \autoref{table:focal_length}. For this last error we have to take into account the previous assumption described by \autoref{eqn:assumption_scaling}.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{C||C|C|C|C}
+\hline
+Distance (\emph{cm})
+	& Target Pattern Size (\emph{px})
+		& Calculated Distance $Z$ (\emph{cm})
+			& Absolute error (\emph{cm}) 
+				& Relative error (\emph{\%}) \\
+\hline
+\hline
+50	& $261.3 \pm 1$	& $54.3 \pm 0.4$	& 4.3	& 7.88	\\
+\hline
+100	& $140.3 \pm 1$	& $101.1 \pm 0.8$	& 1.1	& 1.06	\\
+\hline
+150	& $95 \pm 1$	& $149.3 \pm 1.5$	& 0.7	& 0.46 	\\
+\hline
+\end{tabularx}
+\captionof{table}{Results of the distance calculus}
+\label{table:results}
+\end{center}
+
+\subsubsection{Target size measurement uncertainty impact}
+
+One can see that the uncertainty of the different calculated distances grows with the distance itself. That can be explained looking at the distance uncertainty $\Delta Z$ defined by \autoref{eqn:distance_error}. We can extract the uncertainty impact of the image target size $d$ obtaining \autoref{eqn:target_size_error_impact}.
+
+\begin{equation}
+\label{eqn:target_size_error_impact}
+\Delta Z_d = \frac{Df}{2d^2} \Delta d
+\end{equation}
+
+As the focal length $f$ and the real target size $D$ are constant in our problem, we can give it a numeric value, obtaining \autoref{eqn:target_size_error_impact_numeric}.
+
+\begin{equation}
+\label{eqn:target_size_error_impact_numeric}
+\Delta Z_d [cm] = \frac{7092 [px*cm]}{d^2[px]}
+\end{equation}
+
+The exact impact in the calculations is described by \autoref{table:target_size_error_impact}. This means that if the target size measurement had changed by $1 pixel$, the calculated distance $Z$ would have changed the amount defined by $\Delta Z_d$.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{C||C|C|C|C}
+\hline
+Distance (\emph{cm})
+	& Target Pattern Size (\emph{px})
+		& Calculated Distance $Z$ (\emph{cm})
+			& Uncertainty impact from target size $\Delta Z_d$ (\emph{cm}) \\
+\hline
+\hline
+50	& $261.3 \pm 1$	& $54.3 \pm 0.4$	& 0.1	\\
+\hline
+100	& $140.3 \pm 1$	& $101.1 \pm 0.8$	& 0.4	\\
+\hline
+150	& $95 \pm 1$	& $149.3 \pm 1.5$	& 0.8 	\\
+\hline
+\end{tabularx}
+\captionof{table}{Target size $d$ uncertainty impact on distance $Z$}
+\label{table:target_size_error_impact}
+\end{center}
+
+\end{document}

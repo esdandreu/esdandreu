@@ -3,6 +3,8 @@
 *.fls
 *.out
 *.synctex.gz
+*.upa
+*.upb
 
 .devcontainer
 .vscode

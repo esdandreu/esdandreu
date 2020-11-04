@@ -35,7 +35,9 @@
 \RequirePackage{fontawesome} % Adds icons like \faCircle
 \RequirePackage{datatool} % Allows iterating over csv files
 \RequirePackage{pdfcomment} % Allows the insertion of comments and annotations
-% \RequirePackage{pgffor}
+\RequirePackage{xparse} % Allows complex commands
+\RequirePackage{xifthen} % Allows complex boolean logic
+\RequirePackage{marvosym} % Adds symbols like \Info
 
 %% Configuration --------------------------------------------------------------
 % Colours
@@ -67,13 +69,20 @@
 %% Skills ---------------------------------------------------------------------
 \newcommand{\ratingmarker}{\faCircle}% Rating marker for \cvskill
 
-% TODO add optional command and disable comment if description is not provided
-% TODO add hyperlink
-\newcommand{\cvskill}[3]{% Single skill display
-% Usage \cvskill{Text}{Numeric Rating up to 5}{Description}
-    \textbf{\pdfmarkupcomment[markup=Underline,color=emphasis]{#1}{#3}}\hfill
+\NewDocumentCommand{\cvskill}{ O{} O{} m m}{% Single skill display
+% Usage \cvskill[description][link]{Text}{Numeric Rating up to 5}
+    \ifthenelse{\equal{#1}{}}% If not description
+    {%
+        \ifthenelse{\equal{#2}{}}{\textbf{#3}}{\href{#2}{\textbf{#3}}}%
+        \hfill%
+    }%
+    {%
+        \ifthenelse{\equal{#2}{}}{\textbf{#3}}{\href{#2}{\textbf{#3}}}
+        \pdfmarkupcomment[markup=Underline,color=white]{\Info}{#1}%
+        \hfill%
+    }%
     \foreach \x in {1,...,5}{%
-    \space{\ifnumgreater{\x}{#2}{\color{body!30}}{\color{accent}}\ratingmarker}}\par%
+    \space{\ifnumgreater{\x}{#4}{\color{body!30}}{\color{accent}}\ratingmarker}}\par%
 }
 
 \newcommand{\makecvskills}[1]{% Skill display from csv
@@ -89,7 +98,7 @@
         \link=link%
     }%
     {% Body
-        \cvskill{\skill}{\level}{\description H}
+        \cvskill[\description][\link]{\skill}{\level}
     }%
 }
 

@@ -29,6 +29,8 @@
 \LoadClass{extarticle}
 \NeedsTeXFormat{LaTeX2e}
 %% Packages -------------------------------------------------------------------
+\RequirePackage[sfdefault]{roboto}
+\usepackage[margin=1cm]{geometry} % Sets margins
 \RequirePackage{xcolor} % Allows \colorlet
 \RequirePackage[skins]{tcolorbox} % Adds colours
 % \RequirePackage{ifxetex,ifluatex}
@@ -37,7 +39,7 @@
 \RequirePackage{pdfcomment} % Allows the insertion of comments and annotations
 \RequirePackage{xparse} % Allows complex commands
 \RequirePackage{xifthen} % Allows complex boolean logic
-\RequirePackage{marvosym} % Adds symbols like \Info
+\RequirePackage{fancyvrb} % Allows .txt files input
 
 %% Configuration --------------------------------------------------------------
 % Colours
@@ -45,29 +47,19 @@
 \colorlet{heading}{black}
 \colorlet{emphasis}{black}
 \colorlet{body}{black!80!white}
+% CV Language
+% This allows to use data with several languages and change only the value of 
+% this variable in order to change the whole language of the CV
+\newcommand{\cvlang}{en}
 
-%%% Data structure
-%% Data Path
-%% Data iterator
-\newcommand{\CSVforeach}[3]{%
-% Usage \CSVforeach{Path\To\csv}{Assignements}{Body}
-% For the assignements and body syntax check https://www.dickimaw-books.com/latex/admin/html/dtlforeach.shtml
-    \DTLloaddb{csv}{#1}
-    \DTLforeach*{csv}
-    {% Assignements
-        #2%
-    }%
-    {% Body
-        #3%
-    }%
-}
-
-%% Picture
 %% Education Highlights
 %% Experience
 %% Timeline
 %% Skills ---------------------------------------------------------------------
+% The following markers can be modified.
+% See https://sunsite.icm.edu.pl/pub/CTAN/fonts/fontawesome/doc/fontawesome.pdf
 \newcommand{\ratingmarker}{\faCircle}% Rating marker for \cvskill
+\newcommand{\descriptionmarker}{\faInfoCircle}% Marker for description hover
 
 \NewDocumentCommand{\cvskill}{ O{} O{} m m}{% Single skill display
 % Usage \cvskill[description][link]{Text}{Numeric Rating up to 5}
@@ -78,7 +70,7 @@
     }%
     {%
         \ifthenelse{\equal{#2}{}}{\textbf{#3}}{\href{#2}{\textbf{#3}}}
-        \pdfmarkupcomment[markup=Underline,color=white]{\Info}{#1}%
+        \pdfmarkupcomment[markup=Underline,color=white]{\descriptionmarker}{#1}%
         \hfill%
     }%
     \foreach \x in {1,...,5}{%
@@ -86,23 +78,72 @@
 }
 
 \newcommand{\makecvskills}[1]{% Skill display from csv
-% Usage \makecvskills{Path\To\csv}
+% Usage \makecvskills{Database}
+% The database must be loaded with \DTLloaddb{path/to/csv}
 % The csv must be structured with the following header:
 % cvlang,skill,level,description,link
-    \CSVforeach{#1}%
+    \DTLforeach*{#1}%
     {% Assignements
-        \cvlang=cvlang,%
-        \skill=skill,%
-        \level=level,%
-        \description=description,%
-        \link=link%
+        \SkillCVLang=cvlang,%
+        \Skill=skill,%
+        \SkillLevel=level,%
+        \SkillDescription=description,%
+        \SkillLink=link%
     }%
     {% Body
-        \cvskill[\description][\link]{\skill}{\level}
+        \ifthenelse{\equal{\cvlang}{\SkillCVLang}}% Check skill language
+        {%
+            \cvskill[\SkillDescription][\SkillLink]{\Skill}{\SkillLevel}%
+        }%
+        {}% Else don't add it
     }%
 }
 
-%% Strengths
-%% Objective
-%% Contact
-%% Other Details
+%% Contact --------------------------------------------------------------------
+\newcommand{\makecvcontact}[1]{% Contact display from csv
+% Usage \makecvskills{Database}
+% The database must be loaded with \DTLloaddb{path/to/csv}
+% The csv must be structured with the following header:
+% field,value
+    \DTLforeach*{#1}%
+    {%
+        \Contact=name,%
+        \ContactLink=link%
+    }%
+    {%
+        \ifthenelse{\equal{\ContactLink}{}}% If no link
+        {\large\Contact}% Then put just the field
+        {\href{\ContactLink}{\large\Contact}}% Else make hyperlink
+        \hfill
+    }%
+}
+
+\newcommand{\cvname}[1]{% Name of the CV owner
+    {\Huge\color{heading}#1}
+}
+
+%% Body -----------------------------------------------------------------------
+\newcommand{\bodysection}[1]{\large#1}
+
+\newcommand{\makecvbody}[1]{% Body display
+% Usage \makecvbody{Database}
+% The database must be loaded with \DTLloaddb{path/to/csv}
+% The csv must be structured with the following header:
+% cvlang,field,value
+    \DTLforeach*{#1}%
+    {%
+        \BodyCVLang=cvlang,%
+        \BodySection=field,%
+        \Body=value%
+    }%
+    {%
+        \ifthenelse{\equal{\BodyCVLang}{\cvlang}}% Check language
+        {%
+            % \bodysection{\BodySection}
+            % \Body
+            Holi
+        }%
+        {}% Else don't add it
+        \medskip
+    }%
+}

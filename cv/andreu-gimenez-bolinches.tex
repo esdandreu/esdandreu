@@ -1,9 +1,14 @@
 \documentclass[]{infinity-cv}
 \usepackage[utf8]{inputenc} % Allows the use of emojis and other unicode characters
-\hypersetup{
-    urlbordercolor=emphasis,
-    pdfborderstyle={/S/U/W 1}
-}
+\usepackage{qrcode} % Allows inserting a QR code
+\usepackage{graphicx} % Allows inserting images
+\usepackage{lipsum}
+% Configuration ---------------------------------------------------------------
+%% Language
+% If one has multilingual data, one can modify the value of the language in 
+% order to use the same layout for two different languages
+\renewcommand{\cvlang}{en}
+
 %% Colours
 % \definecolor{VividPurple}{HTML}{000000}
 % \definecolor{SlateGrey}{HTML}{2E2E2E}
@@ -13,21 +18,58 @@
 % \colorlet{emphasis}{SlateGrey}
 % \colorlet{body}{LightGrey}
 
-%% Font
-% Change the font if you want to, depending on whether
-% you're using pdflatex or xelatex/lualatex
-% \ifxetexorluatex
-%   % If using xelatex or lualatex:
-%   \setmainfont{Carlito}
-% \else
-%   % If using pdflatex:
-%   \usepackage[utf8]{inputenc}
-%   \usepackage[T1]{fontenc}
-%   \usepackage[default]{lato}
-% \fi
+% Data ------------------------------------------------------------------------
+% Here we load our csv files in order to use them with \makecvskills and other
+% commands
+% Load Skills
+\DTLloaddb{programming}{data/skills/programming.csv}
+\DTLloaddb{engineering}{data/skills/engineering.csv}
+\DTLloaddb{languages}{data/skills/languages.csv}
+% Load Contact
+\DTLloaddb{contact}{data/contact.csv}
+% Load Body
+\DTLloaddb{body}{data/body.csv}
 
+% Document --------------------------------------------------------------------
 \begin{document}
+% First page ------------------------------------------------------------------
+% Top contact
+\hypersetup{hidelinks} % Hide the links in the contact section
+\begin{minipage}{0.15\textwidth} % Make a column
+    \includegraphics[width=\textwidth]{data/profile.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}{0.6\textwidth}
+    \cvname{Andreu Gimenez Bolinches}
 
-\makecvskills{languages.csv}
+    \medskip
+    \makecvcontact{contact}
+\end{minipage}
+\begin{minipage}{0.15\textwidth}
+    \qrcode[height=\textwidth]{https://raw.githubusercontent.com/esdandreu/esdandreu/main/cv/andreu-gimenez-bolinches.pdf}
+\end{minipage}
 
+% Sidebar
+\hypersetup{
+    urlbordercolor=emphasis,
+    pdfborderstyle={/S/U/W 1}
+}
+\begin{minipage}{0.4\textwidth} % Adjust the size of the sidebar with the
+                                % multiplier of \textwidth
+    \section*{Programming}
+    \makecvskills{programming}
+    \section*{Engineering}
+    \makecvskills{engineering}
+    \section*{Languages}
+    \makecvskills{languages}
+\end{minipage}
+% Main
+\begin{minipage}{0.55\textwidth}
+    \makecvbody{body}
+    \section*{Courses}
+    \section*{Experience}
+\end{minipage}
+\clearpage
+% Second page -----------------------------------------------------------------
+\section{Timeline}
 \end{document} 

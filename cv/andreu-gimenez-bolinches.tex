@@ -3,7 +3,14 @@
 \usepackage{qrcode} % Allows inserting a QR code
 \usepackage{graphicx} % Allows inserting images
 \usepackage{lipsum}
+
 % Configuration ---------------------------------------------------------------
+\newcommand{\n}{\linebreak}
+%% Data path
+% Change this in case of having a different data structure
+\newcommand{\datapath}{data}
+\graphicspath{{\datapath/images/}} % Path to the images folder
+
 %% Language
 % If one has multilingual data, one can modify the value of the language in 
 % order to use the same layout for two different languages
@@ -22,13 +29,15 @@
 % Here we load our csv files in order to use them with \makecvskills and other
 % commands
 % Load Skills
-\DTLloaddb{programming}{data/skills/programming.csv}
-\DTLloaddb{engineering}{data/skills/engineering.csv}
-\DTLloaddb{languages}{data/skills/languages.csv}
+\DTLloaddb{skills}{\datapath/skills.csv}
+\DTLsort{order=ascending}{skills}
 % Load Contact
-\DTLloaddb{contact}{data/contact.csv}
+\DTLloaddb{contact}{\datapath/contact.csv}
 % Load Body
-\DTLloaddb{body}{data/body.csv}
+\DTLloaddb{body}{\datapath/body.csv}
+% Load Experience
+\DTLloaddb{experience}{\datapath/experience.csv}
+\DTLsort{endYear=descending,endMonth=descending}{experience}
 
 % Document --------------------------------------------------------------------
 \begin{document}
@@ -36,7 +45,7 @@
 % Top contact
 \hypersetup{hidelinks} % Hide the links in the contact section
 \begin{minipage}{0.15\textwidth} % Make a column
-    \includegraphics[width=\textwidth]{data/profile.jpg}
+    \includegraphics[width=\textwidth]{profile.jpg}
 \end{minipage}
 \hfill
 \begin{minipage}{0.6\textwidth}
@@ -54,20 +63,17 @@
     urlbordercolor=emphasis,
     pdfborderstyle={/S/U/W 1}
 }
-\begin{minipage}{0.4\textwidth} % Adjust the size of the sidebar with the
+\begin{minipage}{0.3\textwidth} % Adjust the size of the sidebar with the
                                 % multiplier of \textwidth
-    \section*{Programming}
-    \makecvskills{programming}
-    \section*{Engineering}
-    \makecvskills{engineering}
-    \section*{Languages}
-    \makecvskills{languages}
+    \makecvskills{skills}
 \end{minipage}
+\hfill
 % Main
-\begin{minipage}{0.55\textwidth}
+\begin{minipage}{0.65\textwidth}
     \makecvbody{body}
     \section*{Courses}
     \section*{Experience}
+    \makecvexperience{experience}
 \end{minipage}
 \clearpage
 % Second page -----------------------------------------------------------------

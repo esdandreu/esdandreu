@@ -30,7 +30,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %% Packages -------------------------------------------------------------------
 \RequirePackage[sfdefault]{roboto}
-\usepackage[margin=1cm]{geometry} % Sets margins
+\usepackage[margin=1.5cm]{geometry} % Sets margins
 \RequirePackage{xcolor} % Allows \colorlet
 \RequirePackage[skins]{tcolorbox} % Adds colours
 % \RequirePackage{ifxetex,ifluatex}
@@ -40,6 +40,8 @@
 \RequirePackage{xparse} % Allows complex commands
 \RequirePackage{xifthen} % Allows complex boolean logic
 \RequirePackage{fancyvrb} % Allows .txt files input
+\RequirePackage{datenumber} 
+\RequirePackage{calc} 
 
 %% Configuration --------------------------------------------------------------
 % Colours
@@ -52,24 +54,21 @@
 % this variable in order to change the whole language of the CV
 \newcommand{\cvlang}{en}
 
-%% Education Highlights
-%% Experience
-%% Timeline
 %% Skills ---------------------------------------------------------------------
 % The following markers can be modified.
 % See https://sunsite.icm.edu.pl/pub/CTAN/fonts/fontawesome/doc/fontawesome.pdf
-\newcommand{\ratingmarker}{\faCircle}% Rating marker for \cvskill
+\newcommand{\ratingmarker}{{\footnotesize\faCircle}}% Rating marker for \cvskill
 \newcommand{\descriptionmarker}{\faInfoCircle}% Marker for description hover
 
 \NewDocumentCommand{\cvskill}{ O{} O{} m m}{% Single skill display
 % Usage \cvskill[description][link]{Text}{Numeric Rating up to 5}
     \ifthenelse{\equal{#1}{}}% If not description
     {%
-        \ifthenelse{\equal{#2}{}}{\textbf{#3}}{\href{#2}{\textbf{#3}}}%
+        \ifthenelse{\equal{#2}{}}{#3}{\href{#2}{#3}}%
         \hfill%
     }%
     {%
-        \ifthenelse{\equal{#2}{}}{\textbf{#3}}{\href{#2}{\textbf{#3}}}
+        \ifthenelse{\equal{#2}{}}{#3}{\href{#2}{#3}}
         \pdfmarkupcomment[markup=Underline,color=white]{\descriptionmarker}{#1}%
         \hfill%
     }%
@@ -77,14 +76,25 @@
     \space{\ifnumgreater{\x}{#4}{\color{body!30}}{\color{accent}}\ratingmarker}}\par%
 }
 
+\newcommand{\skillsection}[1]{% Style of the Skill Section
+    \medskip{\large#1}
+}%
+\newcommand{\skillscale}[1]{% Style of the Skill Scale
+    \rightline{{\scriptsize#1}}
+}%
+
+\edef\tmpSkillSectionName{temp} % Temporal auxiliar variable
+\edef\tmpSkillScale{temp} % Temporal auxiliar variable
 \newcommand{\makecvskills}[1]{% Skill display from csv
 % Usage \makecvskills{Database}
 % The database must be loaded with \DTLloaddb{path/to/csv}
-% The csv must be structured with the following header:
-% cvlang,skill,level,description,link
+% The csv must be include at least the following header:
+% cvlang,section,skill,level,description,link
     \DTLforeach*{#1}%
     {% Assignements
         \SkillCVLang=cvlang,%
+        \SkillSectionName=section,%
+        \SkillScale=scale,%
         \Skill=skill,%
         \SkillLevel=level,%
         \SkillDescription=description,%
@@ -93,6 +103,22 @@
     {% Body
         \ifthenelse{\equal{\cvlang}{\SkillCVLang}}% Check skill language
         {%
+            \ifthenelse{% If new section
+                \NOT\equal{\tmpSkillSectionName}{\SkillSectionName}%
+            }%
+            {%
+                \skillsection{\SkillSectionName}
+                \skillscale{\SkillScale}
+                \edef\tmpSkillSectionName{\SkillSectionName}
+                \edef\tmpSkillScale{\SkillScale}
+            }%
+            {%
+                \ifthenelse{% If new scale
+                    \NOT\equal{\tmpSkillScale}{\SkillScale}%
+                }%
+                {\skillscale{\SkillScale}}% Add new scale
+                {}% Else don't add scale
+            }% Else don't add section name
             \cvskill[\SkillDescription][\SkillLink]{\Skill}{\SkillLevel}%
         }%
         {}% Else don't add it
@@ -103,11 +129,11 @@
 \newcommand{\makecvcontact}[1]{% Contact display from csv
 % Usage \makecvskills{Database}
 % The database must be loaded with \DTLloaddb{path/to/csv}
-% The csv must be structured with the following header:
-% field,value
+% The csv must be include at least the following header:
+% latexDisplay,value
     \DTLforeach*{#1}%
     {%
-        \Contact=name,%
+        \Contact=latexDisplay,%
         \ContactLink=link%
     }%
     {%
@@ -123,12 +149,12 @@
 }
 
 %% Body -----------------------------------------------------------------------
-\newcommand{\bodysection}[1]{\large#1}
+\newcommand{\bodysection}[1]{{\large#1}\linebreak}
 
 \newcommand{\makecvbody}[1]{% Body display
 % Usage \makecvbody{Database}
 % The database must be loaded with \DTLloaddb{path/to/csv}
-% The csv must be structured with the following header:
+% The csv must be include at least the following header:
 % cvlang,field,value
     \DTLforeach*{#1}%
     {%
@@ -139,9 +165,93 @@
     {%
         \ifthenelse{\equal{\BodyCVLang}{\cvlang}}% Check language
         {%
-            % \bodysection{\BodySection}
-            % \Body
-            Holi
+            \bodysection{\BodySection}
+            \Body
+
+        }%
+        {}% Else don't add it
+        \medskip
+    }%
+}
+
+%% Experience -----------------------------------------------------------------
+\newcommand{\experiencecompany}[1]{{\large#1}\linebreak}
+
+% Date difference
+\newcounter{startDate}
+\newcounter{diffyears}
+\newcounter{diffmonths}
+\newcounter{diffdays}
+
+\newcommand{\datediff}[4]{% Computes the difference between two dates
+% Usage \datediff{startYear}{startMonth}{endYear}{endMonth}
+    \setmydatenumber{startDate}{#1}{#2}{1}%
+    \setmydatenumber{diffdays}{#3}{#4}{1}%
+    \addtocounter{diffdays}{-\thestartDate}%
+    \def\diffbefore{ }%
+    \def\diffafter{}%
+    \ifnum\value{diffdays}<0
+        \setcounter{diffdays}{-\value{diffdays}}%
+    \fi
+    \setcounter{diffyears}{\value{diffdays}/365}%
+    \setcounter{diffdays}{\value{diffdays}-365*\value{diffyears}}%
+    \setcounter{diffmonths}{\value{diffdays}/30}%
+    \setcounter{diffdays}{\value{diffdays}-30*\value{diffmonths}}%
+    %
+    \diffbefore
+    \ifnum\value{diffyears}=0
+    \else
+        \ifnum\value{diffyears}>1
+            \thediffyears\space years,
+        \else
+            \thediffyears\space year,
+        \fi
+    \fi
+    \ifnum\value{diffmonths}=0
+    \else
+        \ifnum\value{diffmonths}>1
+            \thediffmonths\space months
+        \else
+            \thediffmonths\space month
+        \fi
+    \fi
+    \diffafter
+}
+
+\edef\tmpJobCompany{temp} % Temporal auxiliar variable
+\newcommand{\makecvexperience}[1]{% Experience display
+% Usage \makecvexperience{Database}
+% The database must be loaded with \DTLloaddb{path/to/csv}
+% The csv must be include at least the following header:
+% cvlang,title,subtitle,company,companyLink,location,startYear,startMonth,endYear,endMonth,description
+    \DTLforeach*{#1}%
+    {%
+        \JobCVLang=cvlang,%
+        \JobTitle=title,%
+        \JobSubTitle=subtitle,%
+        \JobCompany=company,%
+        \JobLink=companyLink,%
+        \JobLocation=location,%
+        \JobStartYear=startYear,%
+        \JobStartMonth=startMonth,%
+        \JobEndYear=endYear,%
+        \JobEndMonth=endMonth,%
+        \JobDescription=description%
+    }%
+    {%
+        \ifthenelse{\equal{\JobCVLang}{\cvlang}}% Check language
+        {%
+            \ifthenelse{% If new company
+                \NOT\equal{\tmpJobCompany}{\JobCompany}%
+            }%
+            {% Write the company name
+                \experiencecompany{\JobCompany}
+                \edef\tmpJobCompany{temp}
+            }%
+            {}% Don't write company
+            \JobTitle
+            \hfill
+            \datediff{\JobStartYear}{\JobStartMonth}{\JobEndYear}{\JobEndMonth}
         }%
         {}% Else don't add it
         \medskip

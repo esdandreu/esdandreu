@@ -17,13 +17,20 @@
 \renewcommand{\cvlang}{en}
 
 %% Colours
-% \definecolor{VividPurple}{HTML}{000000}
-% \definecolor{SlateGrey}{HTML}{2E2E2E}
-% \definecolor{LightGrey}{HTML}{2E2E2E}
-% \colorlet{heading}{VividPurple}
-% \colorlet{accent}{VividPurple}
-% \colorlet{emphasis}{SlateGrey}
-% \colorlet{body}{LightGrey}
+% Colour for the headings
+\definecolor{Heading}{HTML}{002880}
+% Colour for bullet points and other icons
+\definecolor{Accent}{HTML}{2c6e65}
+% Colour for Company names and other emphasis
+\definecolor{Emphasis}{HTML}{203445}
+% Colour for the overall text
+\definecolor{Body}{HTML}{1e2830}
+
+\colorlet{heading}{Heading}
+\colorlet{accent}{Accent}
+\colorlet{emphasis}{Emphasis}
+\colorlet{body}{Body}
+\AtBeginDocument{\color{body}}
 
 % Data ------------------------------------------------------------------------
 % Here we load our csv files in order to use them with \makecvskills and other
@@ -43,10 +50,21 @@
 \begin{document}
 % First page ------------------------------------------------------------------
 % Top contact
-\hypersetup{hidelinks} % Hide the links in the contact section
+\hypersetup{
+    hidelinks,%
+    pdfnewwindow%
+} % Hide the links in the contact section
 \begin{minipage}{0.15\textwidth} % Make a column
     \includegraphics[width=\textwidth]{profile.jpg}
 \end{minipage}
+\pdfcomment{%
+    Hello traveler, if you are able to read this then you are also able to
+    read the different annotations and clarification written for skills and
+    qualifications. Hover next to what you are interested about and you might 
+    find an annotation. You can try with the English language for example.
+    You might also find hyperlinks that are related to a certain skill or
+    qualification. Try with the Python skill.
+}%
 \hfill
 \begin{minipage}{0.6\textwidth}
     \cvname{Andreu Gimenez Bolinches}
@@ -59,10 +77,6 @@
 \end{minipage}
 
 % Sidebar
-\hypersetup{
-    urlbordercolor=emphasis,
-    pdfborderstyle={/S/U/W 1}
-}
 \begin{minipage}{0.3\textwidth} % Adjust the size of the sidebar with the
                                 % multiplier of \textwidth
     \makecvskills{skills}
@@ -71,8 +85,6 @@
 % Main
 \begin{minipage}{0.65\textwidth}
     \makecvbody{body}
-    \section*{Courses}
-    \section*{Experience}
     \makecvexperience{experience}
 \end{minipage}
 \clearpage

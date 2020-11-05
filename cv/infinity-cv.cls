@@ -40,8 +40,9 @@
 \RequirePackage{xparse} % Allows complex commands
 \RequirePackage{xifthen} % Allows complex boolean logic
 \RequirePackage{fancyvrb} % Allows .txt files input
-\RequirePackage{datenumber} 
-\RequirePackage{calc} 
+\RequirePackage{datenumber} % Allows date calculus for date differences
+\RequirePackage{calc} % Allows better calculus
+\RequirePackage{titlesec} % Better styling for sections
 
 %% Configuration --------------------------------------------------------------
 % Colours
@@ -53,12 +54,21 @@
 % This allows to use data with several languages and change only the value of 
 % this variable in order to change the whole language of the CV
 \newcommand{\cvlang}{en}
-
+% Styling
+% https://www.overleaf.com/learn/latex/sections_and_chapters
+% \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}[<after-code>]
+% \titlespacing{command}{left spacing}{before spacing}{after spacing}[right]
+\titleformat{\section}[block]{\color{heading}\Large\filcenter}{}{1em}{}
+\titlespacing*{\section}{0pt}{5pt plus 2pt minus 1pt}{0pt plus 2pt minus 2pt}
+\titleformat{\subsection}{\color{heading}\large\scshape}{}{1em}{}
+\titlespacing*{\subsection}{0pt}{5pt plus 2pt minus 1pt}{2pt plus 2pt minus 2pt}
+\titleformat{\subsubsection}[block]{\color{emphasis}\large}{}{1em}{}
+\titlespacing*{\subsubsection}{10pt}{0pt plus 2pt minus 1pt}{2pt plus 2pt minus 2pt}
 %% Skills ---------------------------------------------------------------------
 % The following markers can be modified.
 % See https://sunsite.icm.edu.pl/pub/CTAN/fonts/fontawesome/doc/fontawesome.pdf
 \newcommand{\ratingmarker}{{\footnotesize\faCircle}}% Rating marker for \cvskill
-\newcommand{\descriptionmarker}{\faInfoCircle}% Marker for description hover
+\newcommand{\descriptionmarker}{\color{white}\faInfoCircle}% Marker for description hover
 
 \NewDocumentCommand{\cvskill}{ O{} O{} m m}{% Single skill display
 % Usage \cvskill[description][link]{Text}{Numeric Rating up to 5}
@@ -77,7 +87,7 @@
 }
 
 \newcommand{\skillsection}[1]{% Style of the Skill Section
-    \medskip{\large#1}
+    \medskip\subsection{#1}
 }%
 \newcommand{\skillscale}[1]{% Style of the Skill Scale
     \rightline{{\scriptsize#1}}
@@ -149,7 +159,9 @@
 }
 
 %% Body -----------------------------------------------------------------------
-\newcommand{\bodysection}[1]{{\large#1}\linebreak}
+\newcommand{\bodysection}[1]{%
+    \subsection{#1}
+}%
 
 \newcommand{\makecvbody}[1]{% Body display
 % Usage \makecvbody{Database}
@@ -175,7 +187,6 @@
 }
 
 %% Experience -----------------------------------------------------------------
-\newcommand{\experiencecompany}[1]{{\large#1}\linebreak}
 
 % Date difference
 \newcounter{startDate}
@@ -224,6 +235,7 @@
 % The database must be loaded with \DTLloaddb{path/to/csv}
 % The csv must be include at least the following header:
 % cvlang,title,subtitle,company,companyLink,location,startYear,startMonth,endYear,endMonth,description
+    \section{\faBriefcase}
     \DTLforeach*{#1}%
     {%
         \JobCVLang=cvlang,%
@@ -241,19 +253,34 @@
     {%
         \ifthenelse{\equal{\JobCVLang}{\cvlang}}% Check language
         {%
+            \ifthenelse{\equal{\JobEndYear}{Present}}% If it is the current job
+            {% Use the current date
+                \def\JobEndYear{\the\year}
+                \def\JobEndMonth{\the\month}
+            }%
+            {}% Else do nothing
             \ifthenelse{% If new company
                 \NOT\equal{\tmpJobCompany}{\JobCompany}%
             }%
             {% Write the company name
-                \experiencecompany{\JobCompany}
-                \edef\tmpJobCompany{temp}
+                \subsubsection{\JobCompany}
+                \edef\tmpJobCompany{\JobCompany}
             }%
             {}% Don't write company
-            \JobTitle
+            \textbf{\JobTitle}
             \hfill
+            {%
+                \footnotesize\JobStartMonth/\JobStartYear
+                \space- \JobEndMonth/\JobEndYear
+            }%
+            \quad
             \datediff{\JobStartYear}{\JobStartMonth}{\JobEndYear}{\JobEndMonth}
+
+            \JobDescription
+            \medskip
+
         }%
         {}% Else don't add it
-        \medskip
     }%
 }
+%% Journey --------------------------------------------------------------------

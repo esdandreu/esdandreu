@@ -17,3 +17,9 @@ Here are some ideas to get you started:
 
 🔭 I’m currently working on ...
 <!--START_SECTION:activity-->
+1. 🗣 Commented on [#22603](https://github.com/microsoft/vcpkg/issues/22603) in [microsoft/vcpkg](https://github.com/microsoft/vcpkg)
+2. ❗️ Closed issue [#2](https://github.com/esdandreu/python-extension-cpp/issues/2) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+3. 🗣 Commented on [#2](https://github.com/esdandreu/python-extension-cpp/issues/2) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+4. 🗣 Commented on [#2](https://github.com/esdandreu/python-extension-cpp/issues/2) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+5. ❗️ Closed issue [#1](https://github.com/esdandreu/python-extension-cpp/issues/1) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+<!--END_SECTION:activity-->

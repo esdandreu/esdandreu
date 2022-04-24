@@ -17,9 +17,9 @@ Here are some ideas to get you started:
 
 🔭 I’m currently working on ...
 <!--START_SECTION:activity-->
-1. 🗣 Commented on [#170](https://github.com/MIT-SPARK/Kimera-VIO-ROS/issues/170) in [MIT-SPARK/Kimera-VIO-ROS](https://github.com/MIT-SPARK/Kimera-VIO-ROS)
-2. 🗣 Commented on [#22603](https://github.com/microsoft/vcpkg/issues/22603) in [microsoft/vcpkg](https://github.com/microsoft/vcpkg)
-3. ❗️ Closed issue [#2](https://github.com/esdandreu/python-extension-cpp/issues/2) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
-4. 🗣 Commented on [#2](https://github.com/esdandreu/python-extension-cpp/issues/2) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+1. ❗️ Opened issue [#2](https://github.com/lixk/recorder/issues/2) in [lixk/recorder](https://github.com/lixk/recorder)
+2. 🗣 Commented on [#170](https://github.com/MIT-SPARK/Kimera-VIO-ROS/issues/170) in [MIT-SPARK/Kimera-VIO-ROS](https://github.com/MIT-SPARK/Kimera-VIO-ROS)
+3. 🗣 Commented on [#22603](https://github.com/microsoft/vcpkg/issues/22603) in [microsoft/vcpkg](https://github.com/microsoft/vcpkg)
+4. ❗️ Closed issue [#2](https://github.com/esdandreu/python-extension-cpp/issues/2) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
 5. 🗣 Commented on [#2](https://github.com/esdandreu/python-extension-cpp/issues/2) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
 <!--END_SECTION:activity-->

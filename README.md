@@ -17,9 +17,9 @@ Here are some ideas to get you started:
 
 🔭 I’m currently working on ...
 <!--START_SECTION:activity-->
-1. ❗️ Opened issue [#1](https://github.com/AcousticOdometry/python-recorder/issues/1) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
-2. 🗣 Commented on [#170](https://github.com/MIT-SPARK/Kimera-VIO-ROS/issues/170) in [MIT-SPARK/Kimera-VIO-ROS](https://github.com/MIT-SPARK/Kimera-VIO-ROS)
+1. ❗️ Opened issue [#2](https://github.com/AcousticOdometry/python-recorder/issues/2) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
+2. ❗️ Opened issue [#1](https://github.com/AcousticOdometry/python-recorder/issues/1) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
 3. 🗣 Commented on [#170](https://github.com/MIT-SPARK/Kimera-VIO-ROS/issues/170) in [MIT-SPARK/Kimera-VIO-ROS](https://github.com/MIT-SPARK/Kimera-VIO-ROS)
-4. ❗️ Opened issue [#2](https://github.com/lixk/recorder/issues/2) in [lixk/recorder](https://github.com/lixk/recorder)
-5. 🗣 Commented on [#170](https://github.com/MIT-SPARK/Kimera-VIO-ROS/issues/170) in [MIT-SPARK/Kimera-VIO-ROS](https://github.com/MIT-SPARK/Kimera-VIO-ROS)
+4. 🗣 Commented on [#170](https://github.com/MIT-SPARK/Kimera-VIO-ROS/issues/170) in [MIT-SPARK/Kimera-VIO-ROS](https://github.com/MIT-SPARK/Kimera-VIO-ROS)
+5. ❗️ Opened issue [#2](https://github.com/lixk/recorder/issues/2) in [lixk/recorder](https://github.com/lixk/recorder)
 <!--END_SECTION:activity-->

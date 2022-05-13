@@ -18,8 +18,8 @@ Here are some ideas to get you started:
 🔭 I’m currently working on ...
 <!--START_SECTION:activity-->
 1. 🗣 Commented on [#24576](https://github.com/microsoft/vcpkg/issues/24576) in [microsoft/vcpkg](https://github.com/microsoft/vcpkg)
-2. ❗️ Opened issue [#4](https://github.com/esdandreu/python-extension-cpp/issues/4) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
-3. ❗️ Closed issue [#3](https://github.com/esdandreu/python-extension-cpp/issues/3) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
-4. 🗣 Commented on [#3](https://github.com/esdandreu/python-extension-cpp/issues/3) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
-5. ❗️ Opened issue [#3](https://github.com/esdandreu/python-extension-cpp/issues/3) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+2. 🗣 Commented on [#24576](https://github.com/microsoft/vcpkg/issues/24576) in [microsoft/vcpkg](https://github.com/microsoft/vcpkg)
+3. ❗️ Opened issue [#4](https://github.com/esdandreu/python-extension-cpp/issues/4) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+4. ❗️ Closed issue [#3](https://github.com/esdandreu/python-extension-cpp/issues/3) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+5. 🗣 Commented on [#3](https://github.com/esdandreu/python-extension-cpp/issues/3) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
 <!--END_SECTION:activity-->

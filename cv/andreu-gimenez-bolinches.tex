@@ -11,44 +11,22 @@
 \newcommand{\datapath}{data}
 \graphicspath{{\datapath/images/}} % Path to the images folder
 
-%% Language
-% If one has multilingual data, one can modify the value of the language in 
-% order to use the same layout for two different languages
-\renewcommand{\cvlang}{en}
-
-%% Colours
-% Colour for the headings
+%% Colors
+% Color for the headings
 \definecolor{Heading}{HTML}{002880}
-% Colour for bullet points and other icons
-\definecolor{Accent}{HTML}{2c6e65}
-% Colour for Company names and other emphasis
+% Color for Company names and other emphasis
 \definecolor{Emphasis}{HTML}{203445}
-% Colour for the overall text
+% Color for the overall text
 \definecolor{Body}{HTML}{1e2830}
 
 \colorlet{heading}{Heading}
-\colorlet{accent}{Accent}
 \colorlet{emphasis}{Emphasis}
 \colorlet{body}{Body}
 \AtBeginDocument{\color{body}}
 
-% Data ------------------------------------------------------------------------
-% Here we load our csv files in order to use them with \makecvskills and other
-% commands
-% Load Skills
-\DTLloaddb{skills}{\datapath/skills.csv}
-\DTLsort{order=ascending}{skills}
-% Load Contact
-\DTLloaddb{contact}{\datapath/contact.csv}
-% Load Body
-\DTLloaddb{body}{\datapath/body.csv}
-% Load Experience
-\DTLloaddb{experience}{\datapath/experience.csv}
-\DTLsort{endYear=descending,endMonth=descending}{experience}
 
-% Document --------------------------------------------------------------------
 \begin{document}
-% First page ------------------------------------------------------------------
+
 % Top contact
 \hypersetup{
     hidelinks,%
@@ -57,37 +35,58 @@
 \begin{minipage}{0.15\textwidth} % Make a column
     \includegraphics[width=\textwidth]{profile.jpg}
 \end{minipage}
-\pdfcomment{%
-    Hello traveler, if you are able to read this then you are also able to
-    read the different annotations and clarification written for skills and
-    qualifications. Hover next to what you are interested about and you might 
-    find an annotation. You can try with the English language for example.
-    You might also find hyperlinks that are related to a certain skill or
-    qualification. Try with the Python skill.
-}%
 \hfill
 \begin{minipage}{0.6\textwidth}
-    \cvname{Andreu Gimenez Bolinches}
-
+    \centering
+    {\Huge\color{heading}Andreu Gimenez Bolinches}
+    
     \medskip
-    \makecvcontact{contact}
-\end{minipage}
-\begin{minipage}{0.15\textwidth}
-    \qrcode[height=\textwidth]{https://raw.githubusercontent.com/esdandreu/esdandreu/main/cv/andreu-gimenez-bolinches.pdf}
-\end{minipage}
-
-% Sidebar
-\begin{minipage}{0.3\textwidth} % Adjust the size of the sidebar with the
-                                % multiplier of \textwidth
-    \makecvskills{skills}
+    
+    \hfill
+    \href{mailto:esdandreu@gmail.com}{
+        \faEnvelope\hspace{1pt} esdandreu@gmail.com
+    } \hfill
+    \href{https://www.linkedin.com/in/andreu-gimenez-bolinches-esdandreu/}{
+        \faLinkedin
+    } \hfill
+    \href{https://esdandreu.herokuapp.com}{\faGlobe} \hfill
+    \href{https://stackoverflow.com/users/13180090/andreu-gimenez}{
+        \faStackOverflow
+    } \hfill
+    \href{https://github.com/esdandreu}{\faGithub} \hfill
+    \href{https://gitlab.com/esdandreu}{\faGitlab} \hfill
+    
+    \medskip
+    An engineer who wants to save the world
 \end{minipage}
 \hfill
-% Main
-\begin{minipage}{0.65\textwidth}
-    \makecvbody{body}
-    \makecvexperience{experience}
+\begin{minipage}{0.15\textwidth}
+    \qrcode[height=\textwidth]{
+        https://raw.githubusercontent.com/esdandreu/esdandreu/main/cv/andreu-gimenez-bolinches.pdf
+    }
 \end{minipage}
-\clearpage
-% Second page -----------------------------------------------------------------
-\section{Timeline}
-\end{document} 
+\medskip
+
+
+\medskip
+I am a fast learner, many of my programming skills are self-taught. That gives
+me an edge in time limited problems like hackathons and sprints; I am a team
+player. Neither handball, business nor competitions can be won alone. I want to
+invest my time in projects that can make a better place to live for the current
+and future generations. Either by seeking more efficient and sustainable
+solutions to actual problems or developing technologies that intend to restore
+the damage we cause to the environment.
+
+\section{\faWrench}
+
+\begin{minipage}{0.45\textwidth}
+    \input{src/education.tex}
+\end{minipage}
+\hfill
+\begin{minipage}{0.5\textwidth}
+    \input{src/experience.tex}
+\end{minipage}
+
+\section{\faGamepad}
+
+\end{document}

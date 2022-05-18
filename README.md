@@ -17,9 +17,9 @@ Here are some ideas to get you started:
 
 🔭 I’m currently working on ...
 <!--START_SECTION:activity-->
-1. ❗️ Closed issue [#2](https://github.com/AcousticOdometry/python-recorder/issues/2) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
-2. 🗣 Commented on [#2](https://github.com/AcousticOdometry/python-recorder/issues/2) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
-3. 🗣 Commented on [#24576](https://github.com/microsoft/vcpkg/issues/24576) in [microsoft/vcpkg](https://github.com/microsoft/vcpkg)
+1. ❗️ Closed issue [#4](https://github.com/esdandreu/python-extension-cpp/issues/4) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+2. ❗️ Closed issue [#2](https://github.com/AcousticOdometry/python-recorder/issues/2) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
+3. 🗣 Commented on [#2](https://github.com/AcousticOdometry/python-recorder/issues/2) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
 4. 🗣 Commented on [#24576](https://github.com/microsoft/vcpkg/issues/24576) in [microsoft/vcpkg](https://github.com/microsoft/vcpkg)
-5. ❗️ Opened issue [#4](https://github.com/esdandreu/python-extension-cpp/issues/4) in [esdandreu/python-extension-cpp](https://github.com/esdandreu/python-extension-cpp)
+5. 🗣 Commented on [#24576](https://github.com/microsoft/vcpkg/issues/24576) in [microsoft/vcpkg](https://github.com/microsoft/vcpkg)
 <!--END_SECTION:activity-->

@@ -27,11 +27,9 @@
 
 \begin{document}
 
-% Top contact
-\hypersetup{
-    hidelinks,%
-    pdfnewwindow%
-} % Hide the links in the contact section
+\begingroup
+% Hide the links in the contact section
+\hypersetup{ hidelinks, pdfnewwindow}
 \begin{minipage}{0.15\textwidth} % Make a column
     \includegraphics[width=\textwidth]{profile.jpg}
 \end{minipage}
@@ -66,7 +64,7 @@
     }
 \end{minipage}
 \medskip
-
+\endgroup
 
 \medskip
 I am a fast learner, many of my programming skills are self-taught. That gives
@@ -78,6 +76,15 @@ solutions to actual problems or developing technologies that intend to restore
 the damage we cause to the environment.
 
 \section{\faWrench}
+\subsection{Object oriented programming}
+Mainly Python, JavaScript and C++.
+\subsection{Computer-Aided Design}
+I designed a
+\href{https://1drv.ms/b/s!AqZvnCxLmXx9hL9DSw-Ee4zU6H5Rcw?e=8hDatB}{whole UAV
+with Fusion 360} which was later built and flown. Parametrized its dimensions
+and performed static longitudinal stability analysis in the same tool which
+accelerated the whole decision making process.
+\subsection{Simulation}
 
 \begin{minipage}{0.45\textwidth}
     \input{src/education.tex}
@@ -88,5 +95,8 @@ the damage we cause to the environment.
 \end{minipage}
 
 \section{\faGamepad}
+I play handball in my spare time, I 
+
+\section{Languages}
 
 \end{document}

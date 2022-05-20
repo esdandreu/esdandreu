@@ -1,6 +1,8 @@
-### Hi there 👋
+[![CV](https://img.shields.io/badge/CV-open_to_work-green)](./cv/andreu-gimenez-bolinches.pdf)
+[![linkedin](https://img.shields.io/badge/Andreu_Gimenez_Bolinches-gray?logo=linkedin)](https://www.linkedin.com/in/andreu-gimenez-bolinches-esdandreu/)
+[![stackoverflow](https://img.shields.io/badge/-gray?logo=stackoverflow)](https://stackoverflow.com/users/13180090/andreu-gimenez)
+[![gitlab](https://img.shields.io/badge/-gray?logo=gitlab)](https://gitlab.com/esdandreu)
 
-<object data="https://img.shields.io/badge/Hello-World-red"></object>
 
 <!--
 **esdandreu/esdandreu** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

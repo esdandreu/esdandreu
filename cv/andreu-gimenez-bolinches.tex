@@ -1,8 +1,7 @@
 \documentclass[]{infinity-cv}
-\usepackage[utf8]{inputenc} % Allows the use of emojis and other unicode characters
+\usepackage[utf8]{inputenc} % Allows the use of emojis and unicode
 \usepackage{qrcode} % Allows inserting a QR code
 \usepackage{graphicx} % Allows inserting images
-\usepackage{lipsum}
 
 % Configuration ---------------------------------------------------------------
 \newcommand{\n}{\linebreak}
@@ -11,19 +10,14 @@
 \newcommand{\datapath}{data}
 \graphicspath{{\datapath/images/}} % Path to the images folder
 
-%% Colors
-% Color for the headings
-\definecolor{Heading}{HTML}{002880}
-% Color for Company names and other emphasis
-\definecolor{Emphasis}{HTML}{203445}
-% Color for the overall text
-\definecolor{Body}{HTML}{1e2830}
-
-\colorlet{heading}{Heading}
-\colorlet{emphasis}{Emphasis}
-\colorlet{body}{Body}
-\AtBeginDocument{\color{body}}
-
+% Links are colored by default
+\hypersetup{
+    pdfnewwindow,
+    colorlinks,
+    urlcolor=url,
+}
+% Remove page numbers
+\pagenumbering{gobble}
 
 \begin{document}
 
@@ -40,7 +34,6 @@
     
     \medskip
     
-    \hfill
     \href{mailto:esdandreu@gmail.com}{
         \faEnvelope\hspace{1pt} esdandreu@gmail.com
     } \hfill
@@ -54,7 +47,7 @@
     \href{https://github.com/esdandreu}{\faGithub} \hfill
     \href{https://gitlab.com/esdandreu}{\faGitlab} \hfill
     
-    \medskip
+    \medskip \medskip
     Still trying to save the world?
 \end{minipage}
 \hfill
@@ -75,28 +68,21 @@ and future generations. Either by seeking more efficient and sustainable
 solutions to actual problems or developing technologies that intend to restore
 the damage we cause to the environment.
 
-\section{\faWrench}
-\subsection{Object oriented programming}
-Mainly Python, JavaScript and C++.
-\subsection{Computer-Aided Design}
-I designed a
-\href{https://1drv.ms/b/s!AqZvnCxLmXx9hL9DSw-Ee4zU6H5Rcw?e=8hDatB}{whole UAV
-with Fusion 360} which was later built and flown. Parametrized its dimensions
-and performed static longitudinal stability analysis in the same tool which
-accelerated the whole decision making process.
-\subsection{Simulation}
+\input{src/skills.tex}
+
+\medskip
 
 \begin{minipage}{0.45\textwidth}
     \input{src/education.tex}
+    \input{src/languages.tex}
 \end{minipage}
 \hfill
 \begin{minipage}{0.5\textwidth}
     \input{src/experience.tex}
 \end{minipage}
 
-\section{\faGamepad}
-I play handball in my spare time, I 
-
-\section{Languages}
+\vfill
+\centering
+References on request.
 
 \end{document}

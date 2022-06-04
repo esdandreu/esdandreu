@@ -37,14 +37,14 @@
 \RequirePackage{fontawesome} % Adds icons like \faCircle
 \RequirePackage{pdfcomment} % Allows the insertion of comments and annotations
 \RequirePackage{titlesec} % Better styling for sections
-\RequirePackage{enumitem} % Better itemize control
 
 %% Configuration --------------------------------------------------------------
-% Colours
-\colorlet{accent}{blue!70!black}
-\colorlet{heading}{black}
-\colorlet{emphasis}{black}
-\colorlet{body}{black!80!white}
+% Colors
+\definecolor{Heading}{HTML}{002880} \colorlet{heading}{Heading}
+\definecolor{Emphasis}{HTML}{203445} \colorlet{emphasis}{Emphasis}
+\definecolor{Body}{HTML}{1e2830} \colorlet{body}{Body}
+\colorlet{url}{gray!60!blue}
+\AtBeginDocument{\color{body}}
 % Styling
 % https://www.overleaf.com/learn/latex/sections_and_chapters
 % \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}[<after-code>]
@@ -55,7 +55,3 @@
 \titlespacing*{\subsection}{10pt}{0pt plus 2pt minus 1pt}{2pt plus 2pt minus 2pt}
 \titleformat{\subsubsection}{\color{heading}\scshape}{}{1em}{}
 \titlespacing*{\subsubsection}{0pt}{5pt plus 2pt minus 1pt}{2pt plus 2pt minus 2pt}
-
-% Compact itemize
-\def\labelitemi{--}
-\setlist[itemize]{leftmargin=*,itemsep=0pt,topsep=0pt,partopsep=0pt,parsep=0pt}

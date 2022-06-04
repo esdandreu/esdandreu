@@ -1,6 +1,8 @@
 [![linkedin](https://img.shields.io/badge/:-Andreu_Gimenez_Bolinches-blue?logo=linkedin)](https://www.linkedin.com/in/andreu-gimenez-bolinches-esdandreu/)
 [![CV](https://img.shields.io/badge/CV:-open_to_work-green)](./cv/andreu-gimenez-bolinches.pdf)
-[![web](https://img.shields.io/badge/Web:-esdandreu.herokuapp.com-important)](https://esdandreu.herokuapp.com)
+<a href="https://esdandreu.github.io/" target="_blank">
+![web](https://img.shields.io/badge/Web:-esdandreu.github.io-important)
+</a>
 [![stackoverflow](https://img.shields.io/stackexchange/stackoverflow/r/13180090?label=%3A&logo=stackoverflow)](https://stackoverflow.com/users/13180090/andreu-gimenez)
 [![gitlab](https://img.shields.io/badge/:-Gitlab-lightgrey?logo=gitlab)](https://gitlab.com/esdandreu)
 

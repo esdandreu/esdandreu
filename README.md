@@ -7,9 +7,9 @@
 
 🔭 I’m currently working on ...
 <!--START_SECTION:activity-->
-1. ❗️ Opened issue [#11](https://github.com/AcousticOdometry/python-recorder/issues/11) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
-2. 🎉 Merged PR [#8](https://github.com/AcousticOdometry/python-recorder/pull/8) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
-3. 🎉 Merged PR [#7](https://github.com/AcousticOdometry/python-recorder/pull/7) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
-4. 🎉 Merged PR [#5](https://github.com/AcousticOdometry/python-recorder/pull/5) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
-5. 🎉 Merged PR [#6](https://github.com/AcousticOdometry/python-recorder/pull/6) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
+1. ❌ Closed PR [#9](https://github.com/AcousticOdometry/python-recorder/pull/9) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
+2. ❌ Closed PR [#10](https://github.com/AcousticOdometry/python-recorder/pull/10) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
+3. ❗️ Opened issue [#12](https://github.com/AcousticOdometry/python-recorder/issues/12) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
+4. ❗️ Closed issue [#11](https://github.com/AcousticOdometry/python-recorder/issues/11) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
+5. ❗️ Opened issue [#11](https://github.com/AcousticOdometry/python-recorder/issues/11) in [AcousticOdometry/python-recorder](https://github.com/AcousticOdometry/python-recorder)
 <!--END_SECTION:activity-->

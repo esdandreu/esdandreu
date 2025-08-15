@@ -37,6 +37,10 @@
 \RequirePackage{fontawesome} % Adds icons like \faCircle
 \RequirePackage{pdfcomment} % Allows the insertion of comments and annotations
 \RequirePackage{titlesec} % Better styling for sections
+\usepackage{accsupp} % \BeginAccSupp ... \EndAccSupp
+
+
+
 
 %% Configuration --------------------------------------------------------------
 % Colors
@@ -49,9 +53,21 @@
 % https://www.overleaf.com/learn/latex/sections_and_chapters
 % \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}[<after-code>]
 % \titlespacing{command}{left spacing}{before spacing}{after spacing}[right]
-\titleformat{\section}[block]{\color{heading}\Large\filcenter}{}{1em}{}
+\titleformat{\section}[block]{\color{heading}\large\filcenter}{}{1em}{}
 \titlespacing*{\section}{0pt}{5pt plus 2pt minus 1pt}{0pt plus 2pt minus 2pt}
-\titleformat{\subsection}[block]{\color{emphasis}\large}{}{1em}{}
-\titlespacing*{\subsection}{10pt}{0pt plus 2pt minus 1pt}{2pt plus 2pt minus 2pt}
-\titleformat{\subsubsection}{\color{heading}\scshape}{}{1em}{}
-\titlespacing*{\subsubsection}{0pt}{5pt plus 2pt minus 1pt}{2pt plus 2pt minus 2pt}
+\titleformat{\subsection}[runin]{\color{emphasis}\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{0pt}{1em}
+
+% Commands
+% Invisible text that's still exposed to copy/paste, screen readers, and many parsers.
+\newcommand{\invisible}[1]{%
+  \BeginAccSupp{method=pdfstringdef,unicode=true,ActualText={#1}}%
+  \null % zero-width anchor so the PDF actually emits a content object
+  \EndAccSupp{}
+}
+
+% Expand acronyms for machines while keeping the short form for humans.
+\newcommand{\abbr}[2]{% #1 = visible short, #2 = machine-readable expansion
+  \BeginAccSupp{method=pdfstringdef,unicode=true,ActualText={#2}}#1\EndAccSupp{}
+}
+

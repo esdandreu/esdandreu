@@ -1,63 +1,35 @@
-\section*{\faInstitution} \label{sec:education}
+\newcommand{\EducationEntry}[3]{% #1=degree, #2=university, #3=years
+  % What machines should read (one logical line):
+  \BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={#1, #2, #3}}%
+  % What humans should see (one PDF text object):
+  \subsection{#1} #2 \hfill #3
+  \EndAccSupp{}
+}
+
+\BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={\# Education}}%
+\section*{\faInstitution \quad Education} \label{sec:education}
+\EndAccSupp{}
 \phantomsection \addcontentsline{toc}{section}{Education}
 
-\subsection{M.Sc.Eng. Advanced Robotics}
-
-\textbf{Keio University} \hfill 
-{\footnotesize 2021 - 2022} \\
-{
-\raggedright
--
-\href{https://www.linkedin.com/in/andreu-gimenez/overlay/education/733808829/multiple-media-viewer/?treasuryMediaId=1635488056423}{Concurrent
-    Computing in Robotics} \\
-- Thesis: \href{https://github.com/AcousticOdometry/AO}{Acoustic Odometry}
+\medskip
+\EducationEntry{M.Sc.Eng. Advanced Robotics}
+{Keio University}
+{2021 - 2022}
 \\
-}
+- Developed a machine learning pipeline for motion estimation from audio
+sensors: \href{https://github.com/AcousticOdometry/AO}{Acoustic Odometry}. 
 
-\subsection{M.Eng. Automatics and Robotics}
 
-\textbf{Warsaw University of Technology} \hfill 
-{\footnotesize 2020 - 2021} \\
-{
-\raggedright
--
-\href{https://www.linkedin.com/in/andreu-gimenez/overlay/education/674981675/multiple-media-viewer/?treasuryMediaId=1635461293122}{Human-robot
-    interaction, haptic and collaborative robots} \\
-}
+\EducationEntry{M.Eng. Automatics and Robotics}
+{Warsaw University of Technology}
+{2020 - 2021}
 
-\subsection{B.Eng. Aerospace Engineering}
+\EducationEntry{B.Eng. Aerospace Engineering}
+{Universitat Politècnica de Valencia}
+{2015 - 2019} \\
+- Exchange student in Embry-Riddle Aeronautical University (2018) and
+Hogeschool van Amsterdam (2019). \\
+- Designed \& built an Unmanned Aerial Vehicle that is capable of flying in
+a predetermined route and drop a small payload. 
 
-\textbf{Universitat Politècnica de Valencia} \hfill 
-{\footnotesize 2015 - 2019} \\
-{
-\raggedright
-- Hackathon Castellon 2017:
-\href{https://www.upv.es/rtv/tv/actualidad-en-la-upv/59131}{AI-Machine
-    Learning challenge winner and most popular project} \\
-- EOGU: \href{https://www.jamesdysonaward.org/2018/project/eogu/}{James
-    Dyson Award national finalist};
-\href{http://www.upv.es/noticias-upv/noticia-10449-climatelaunchp-es.html}{Climate
-    Launchpad national winner}; StartUPV winner in the Advanced Idea section
-\\
-}
-
-\textbf{Embry-Riddle Aeronautical University} \hfill 
-{\footnotesize Exchange 2018} \\
-{
-\raggedright
-- Involved in the \href{http://www.auvsi-suas.org/}{AUVSI SUAS} competition
-with the robotics student association \\
-}
-
-% Involved in the AUVSI SUAS competition with the robotics student
-% association 
-
-\textbf{Hogeschool van Amsterdam} \hfill 
-{\footnotesize Exchange 2019} \\
-{
-\raggedright
--
-\href{https://1drv.ms/b/s!AqZvnCxLmXx9hL0wv02aRwBlym0cmA?e=0Wq9fF}{Thesis: Design,
-    Build \& Fly} an Unmanned Aerial Vehicle that is capable of flying a
-predetermined route and drop a small payload \\
-}
+\medskip

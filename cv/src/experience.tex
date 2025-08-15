@@ -1,47 +1,67 @@
-\section*{\faBriefcase} \label{sec:experience}
+\newcommand{\ExperienceEntry}[3]{% #1=organization - title, #2=duration, #3=period
+  % What machines should read (one logical line):
+  \BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={#1, #2, #3}}%
+  % What humans should see (one PDF text object):
+  \subsection{#1} \hfill #2 \\
+  {\footnotesize #3}
+  \EndAccSupp{}
+}
+
+\BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={\# Experience}}%
+\section*{\faBriefcase \quad Experience} \label{sec:experience}
+\EndAccSupp{}
 \phantomsection \addcontentsline{toc}{section}{Experience}
 
-\subsection{Dotphoton}
-\textbf{Software Engineer} \hfill 2 years \\
-{\footnotesize October 2022 - Present} \\
+\ExperienceEntry{Dotphoton - Software Engineer}
+{3 years}
+{October 2022 - Present | Remote} \abbr{\\}{ }
 {
     \raggedright
-    - Lead engineer for \href{https://www.dotphoton.com/products/jetraw}{Jetraw 
-    a multi-storage data management platform with 8x image compression} \\
-    - Architecture and full stack implementation \\
-    - Multiple languages (C++, Go, TypeScript, Python) with different
-    interoperability solutions (REST API, C shared libraries, Node Addon) \\
-}
+    - Lead engineer for
+    \href{https://www.dotphoton.com/products/jetraw}{Jetraw}, a multi-storage
+    data management platform achieving 8x image compression.\\
 
+    - Architected and implemented full stack solutions using C++, Go,
+    TypeScript, and Python.\\
+
+    - Developed RESTful APIs, C shared libraries, and Node Addons, optimizing
+    interoperability and system scalability.\\
+
+    - Designed cloud-native CI/CD workflows using GitHub Actions and Jenkins to
+    automate robust deployment pipelines.\\
+}
 \medskip
-\subsection{ProntoPro}
-\textbf{Marketing Automation Specialist} \hfill Part-time \quad 7 months \\ 
-{\footnotesize October 2020 - April 2021} \\
+
+\ExperienceEntry{ProntoPro - Marketing Automation Specialist}
+{7 months}
+{October 2020 - April 2021 (Part-time) | Remote} \abbr{\\}{ }
 {
     \raggedright
-    - Integrate different marketing tools with an in-house database using
-    sqlalchemy and pandas \\
-    - Automated testing using pytest and Gitlab's CI/CD \\
-    - Projects manager and lead of a small team of junior engineers \\
+    - Integrated multiple marketing automation tools with an in-house MySQL database using Python, pandas, and SQLAlchemy.
+	- Implemented automated testing with pytest and GitLab CI/CD.
+	- Managed projects and led a team of junior engineers.
 }
-
-\textbf{Marketing Automation Engineer} \hfill 11 months \\ 
-{\footnotesize November 2019 - September 2021} \\
-{
-    \raggedright
-    - MySQL database development and data scrapping \\
-    - Full stack web development with Django and React \\
-    - Junction Hackathon 2019:
-    \href{http://www.upv.es/noticias-upv/noticia-11673-makers-upv-tri-es.html}{Winner
-    of the Effective Radiation Therapy Plan Review challenge}\\
-}
-
 \medskip
-\subsection{Stadler Rail Valencia}
-\textbf{Software Engineer} \hfill Part-time \quad 6 months \\ 
-{\footnotesize September 2018 - Feb 2019} \\
+
+\ExperienceEntry
+{ProntoPro - Marketing Automation Engineer} 
+{11 months}
+{November 2019 - September 2021 | Milan, Italy} \abbr{\\}{ }
 {
     \raggedright
-    - Matlab Software development with GUI \\
-    - Predictive Maintenance \\
+	- Implemented data acquisition pipelines with web scraping tools into an
+	in-house MySQL database. \\
+    - Delivered a full-stack web application with Django and React used as an
+    internal marketing tool.
 }
+\medskip
+
+\ExperienceEntry
+{Stadler Rail Valencia - Software Engineer}
+{6 months}
+{September 2018 - Feb 2019 (Part-time) | Valencia, Spain} \abbr{\\}{ }
+{
+    \raggedright
+    - Developed predictive maintenance software with MATLAB, including GUI design.
+}
+\medskip

@@ -24,65 +24,84 @@
 \begingroup
 % Hide the links in the contact section
 \hypersetup{ hidelinks, pdfnewwindow}
-\begin{minipage}{0.15\textwidth} % Make a column
-    \includegraphics[width=\textwidth]{profile.jpg}
-\end{minipage}
-\hfill
-\begin{minipage}{0.6\textwidth}
-    \centering
-    {\Huge\color{heading}Andreu Gimenez Bolinches}
-    
-    \medskip
-    
-    \href{mailto:esdandreu@gmail.com}{
-        \faEnvelope\hspace{1pt} esdandreu@gmail.com
-    } \hfill
-    \href{https://www.linkedin.com/in/andreu-gimenez/}{
-        \faLinkedin
-    } \hfill
-    \href{https://esdandreu.dev/}{\faGlobe} \hfill
-    \href{https://stackoverflow.com/users/13180090/andreu-gimenez}{
-        \faStackOverflow
-    } \hfill
-    \href{https://github.com/esdandreu}{\faGithub} \hfill
-    \href{https://gitlab.com/esdandreu}{\faGitlab} \hfill
-    
-    \medskip \medskip
-    Still trying to save the world?
-\end{minipage}
-\hfill
-\begin{minipage}{0.15\textwidth}
-    \qrcode[height=\textwidth]{
-        https://raw.githubusercontent.com/esdandreu/esdandreu/main/cv/andreu-gimenez-bolinches.pdf
-    }
-\end{minipage}
-\medskip
-\endgroup
+
+\centering
+{\LARGE\color{heading}Andreu Gimenez Bolinches}
 
 \medskip
-I want to invest my time in projects that can make a better place to live for
-the current and future generations. Either by seeking more efficient and
-sustainable solutions to actual problems or by developing technologies that
-intend to restore the damage we cause to the environment. I am a fast learner.
-Many of my programming skills are self-taught. That gives me an edge in
-time-limited problems like hackathons and sprints. I am a team player. Neither
-handball, business, nor competitions can be won alone.
+
+\abbr{
+\hfill \hfill
+\href{mailto:esdandreu@gmail.com}{
+    \faEnvelope\hspace{1pt} esdandreu@gmail.com
+} \hfill
+\href{https://www.linkedin.com/in/andreu-gimenez/}{
+    \faLinkedin
+} \hfill
+\href{https://esdandreu.dev/}{\faGlobe} \hfill
+\href{https://stackoverflow.com/users/13180090/andreu-gimenez}{
+    \faStackOverflow
+} \hfill
+\href{https://github.com/esdandreu}{
+    \faGithub
+} \hfill
+\href{https://gitlab.com/esdandreu}{
+    \faGitlab
+} \hfill
+\hfill \hfill
+}{
+Email: esdandreu@gmail.com\\
+LinkedIn: https://www.linkedin.com/in/andreu-gimenez/\\
+GitHub: https://github.com/esdandreu\\
+}
+
+\medskip
+
+\medskip
+
+\newcommand{\IntroductionWithQR}[1]{% #1=introduction
+    \abbr{
+    % \begin{minipage}{0.15\textwidth} % Make a column with picture
+    %     \includegraphics[width=\textwidth]{profile.jpg}
+    % \end{minipage}
+    \begin{minipage}{0.83\textwidth}#1\end{minipage}
+    \hfill
+    \begin{minipage}{0.12\textwidth}
+        \qrcode[height=\textwidth]{
+            https://raw.githubusercontent.com/esdandreu/esdandreu/main/cv/andreu-gimenez-bolinches.pdf
+        }
+    \end{minipage}
+    }{#1}
+}
+
+\IntroductionWithQR{I want to invest my time in projects that can make a better
+place to live for the current and future generations. Either by seeking more
+efficient and sustainable solutions to actual problems or by developing
+technologies that intend to restore the damage we cause to the environment. I
+am a fast learner. Many of my programming skills are self-taught. That gives me
+an edge in time-limited problems like hackathons and sprints. I am a team
+player. Neither handball, business, nor competitions can be won alone.}
+
+
+
+\endgroup
 
 \input{src/skills.tex}
 
-\medskip
+\input{src/experience.tex}
 
-\begin{minipage}[t]{0.45\textwidth}
-    \input{src/education.tex}
-    \input{src/languages.tex}
+\input{src/education.tex}
 
-    \centering
-    \bigskip
-    References on request.
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.5\textwidth}
-    \input{src/experience.tex}
-\end{minipage}
+\input{src/more.tex}
+
+\centering
+References on request
+
+% Keywords
+\invisible{Full Stack Engineering, React, Next.js, TypeScript, JavaScript, Go,
+    Python, C++, Node.js, API Design, RESTful Services, Microservices,
+    PostgreSQL, MySQL, AWS, Docker, Jenkins, GitHub Actions, CI/CD Pipelines,
+    DevOps, System Architecture, SaaS Development, Agile, Lean Product
+    Development, Sustainability Engineering}
 
 \end{document}

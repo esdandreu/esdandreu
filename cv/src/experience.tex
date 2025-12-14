@@ -7,7 +7,7 @@
     % #6=end date
     % #7=location
     \abbr{
-          \subsection{#1 - #2} \hfill #4 \\
+          \subsection{\textbf{#1} | #2} \hfill #4 \\
           {\footnotesize #5 - #6%
             \IfStrEq{#3}{Full time}{}{ (#3)}%
             \IfStrEq{#7}{Remote}{}{ | #7}%
@@ -15,7 +15,6 @@
     }{%
         Position: #2
         Employer: #1
-        Industry: Information Technologies and Services
         Employment Type: #3
         Start date: #5
         End date: #6
@@ -23,7 +22,7 @@
     }%
 }
 
-\abbr{\section*{\faBriefcase \quad Experience} \label{sec:experience}}
+\abbr{\section*{Experience} \label{sec:experience}}
 {\# Experience}
 \phantomsection \addcontentsline{toc}{section}{Experience}
 

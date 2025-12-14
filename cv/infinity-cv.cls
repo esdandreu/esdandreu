@@ -54,9 +54,9 @@
 % https://www.overleaf.com/learn/latex/sections_and_chapters
 % \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}[<after-code>]
 % \titlespacing{command}{left spacing}{before spacing}{after spacing}[right]
-\titleformat{\section}[block]{\color{heading}\large\filcenter}{}{1em}{}
+\titleformat{\section}[block]{\bfseries\color{heading}\large\filcenter}{}{1em}{\MakeUppercase}
 \titlespacing*{\section}{0pt}{5pt plus 2pt minus 1pt}{0pt plus 2pt minus 2pt}
-\titleformat{\subsection}[runin]{\color{emphasis}\bfseries}{}{0pt}{}
+\titleformat{\subsection}[runin]{\color{emphasis}}{}{0pt}{}
 \titlespacing*{\subsection}{0pt}{0pt}{1em}
 
 % Commands

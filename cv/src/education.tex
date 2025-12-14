@@ -1,34 +1,42 @@
-\newcommand{\EducationEntry}[3]{% #1=degree, #2=university, #3=years
-  % What machines should read (one logical line):
-  \BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={#1, #2, #3}}%
-  % What humans should see (one PDF text object):
-  \subsection{#1} #2 \hfill #3
-  \EndAccSupp{}
+\newcommand{\EducationEntry}[4]{
+    % #1=degree
+    % #2=specialization
+    % #3=school
+    % #4=years
+    % What machines should read (one logical line):
+    \BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={#1, #2, #3, #4}}%
+    % What humans should see (one PDF text object):
+    \subsection{\textbf{#1} | #2} \hfill #4 \\
+    {\footnotesize #3}
+    \EndAccSupp{}
 }
 
 \BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={\# Education}}%
-\section*{\faInstitution \quad Education} \label{sec:education}
+\section*{Education} \label{sec:education}
 \EndAccSupp{}
 \phantomsection \addcontentsline{toc}{section}{Education}
 
 \medskip
-\EducationEntry{Master's of Science in Advanced Robotics}
-{Keio University}
+\EducationEntry{Master's of Science}
+{Advanced Robotics (Computer Science)}
+{Keio University | Tokyo, Japan}
 {2021 - 2022}
 \\
 - Developed a machine learning pipeline for motion estimation from audio
 sensors: \href{https://github.com/AcousticOdometry/AO}{Acoustic Odometry}. 
 
 
-\EducationEntry{Master's of Engineering in Automatics and Robotics}
-{Warsaw University of Technology}
+\EducationEntry{Master's of Engineering}
+{Automatics and Robotics}
+{Warsaw University of Technology | Warsaw, Poland}
 {2020 - 2021}
 
-\EducationEntry{Bachelor's Degree in Aerospace Engineering}
-{Universitat Politècnica de Valencia}
+\EducationEntry{Bachelor's Degree}
+{Aerospace Engineering}
+{Universitat Politècnica de Valencia | Valencia, Spain}
 {2015 - 2019} \\
-- Exchange student in Embry-Riddle Aeronautical University (2018) and
-Hogeschool van Amsterdam (2019). \\
+% - Exchange student in Embry-Riddle Aeronautical University (2018) and
+% Hogeschool van Amsterdam (2019). \\
 - Designed \& built an Unmanned Aerial Vehicle that is capable of flying in
 a predetermined route and drop a small payload. 
 

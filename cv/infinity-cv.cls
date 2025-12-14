@@ -38,6 +38,7 @@
 \RequirePackage{pdfcomment} % Allows the insertion of comments and annotations
 \RequirePackage{titlesec} % Better styling for sections
 \usepackage{accsupp} % \BeginAccSupp ... \EndAccSupp
+\RequirePackage{xstring} % Allows \IfStrEq
 
 
 

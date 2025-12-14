@@ -23,66 +23,11 @@
 
 \begingroup
 % Hide the links in the contact section
-\hypersetup{ hidelinks, pdfnewwindow}
+\hypersetup{hidelinks, pdfnewwindow}
 
-\centering
-{\LARGE\color{heading}Andreu Gimenez Bolinches}
+\input{src/details.tex}
 
-\medskip
-
-\abbr{
-\hfill \hfill
-\href{mailto:esdandreu@gmail.com}{
-    \faEnvelope\hspace{1pt} esdandreu@gmail.com
-} \hfill
-\href{https://www.linkedin.com/in/andreu-gimenez/}{
-    \faLinkedin
-} \hfill
-\href{https://esdandreu.dev/}{\faGlobe} \hfill
-\href{https://stackoverflow.com/users/13180090/andreu-gimenez}{
-    \faStackOverflow
-} \hfill
-\href{https://github.com/esdandreu}{
-    \faGithub
-} \hfill
-\href{https://gitlab.com/esdandreu}{
-    \faGitlab
-} \hfill
-\hfill \hfill
-}{
-Email: esdandreu@gmail.com\\
-LinkedIn: https://www.linkedin.com/in/andreu-gimenez/\\
-GitHub: https://github.com/esdandreu\\
-}
-
-\medskip
-
-\medskip
-
-\newcommand{\IntroductionWithQR}[1]{% #1=introduction
-    \abbr{
-    % \begin{minipage}{0.15\textwidth} % Make a column with picture
-    %     \includegraphics[width=\textwidth]{profile.jpg}
-    % \end{minipage}
-    \begin{minipage}{0.83\textwidth}#1\end{minipage}
-    \hfill
-    \begin{minipage}{0.12\textwidth}
-        \qrcode[height=\textwidth]{
-            https://raw.githubusercontent.com/esdandreu/esdandreu/main/cv/andreu-gimenez-bolinches.pdf
-        }
-    \end{minipage}
-    }{#1}
-}
-
-\IntroductionWithQR{I want to invest my time in projects that can make a better
-place to live for the current and future generations. Either by seeking more
-efficient and sustainable solutions to actual problems or by developing
-technologies that intend to restore the damage we cause to the environment. I
-am a fast learner. Many of my programming skills are self-taught. That gives me
-an edge in time-limited problems like hackathons and sprints. I am a team
-player. Neither handball, business, nor competitions can be won alone.}
-
-
+\input{src/introduction.tex}
 
 \endgroup
 

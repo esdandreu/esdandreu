@@ -1,20 +1,39 @@
-\newcommand{\ExperienceEntry}[3]{% #1=organization - title, #2=duration, #3=period
-  % What machines should read (one logical line):
-  \BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={#1, #2, #3}}%
-  % What humans should see (one PDF text object):
-  \subsection{#1} \hfill #2 \\
-  {\footnotesize #3}
-  \EndAccSupp{}
+\newcommand{\ExperienceEntry}[7]{
+    % #1=employer
+    % #2=position
+    % #3=employment type
+    % #4=duration
+    % #5=start date
+    % #6=end date
+    % #7=location
+    \abbr{
+          \subsection{#1 - #2} \hfill #4 \\
+          {\footnotesize #5 - #6%
+            \IfStrEq{#3}{Full time}{}{ (#3)}%
+            \IfStrEq{#7}{Remote}{}{ | #7}%
+          }%
+    }{%
+        Position: #2
+        Employer: #1
+        Industry: Information Technologies and Services
+        Employment Type: #3
+        Start date: #5
+        End date: #6
+        Location: #7
+    }%
 }
 
-\BeginAccSupp{method=pdfstringdef,unicode=true, ActualText={\# Experience}}%
-\section*{\faBriefcase \quad Experience} \label{sec:experience}
-\EndAccSupp{}
+\abbr{\section*{\faBriefcase \quad Experience} \label{sec:experience}}
+{\# Experience}
 \phantomsection \addcontentsline{toc}{section}{Experience}
 
-\ExperienceEntry{Dotphoton - Software Engineer}
+\ExperienceEntry{Dotphoton}
+{Full Stack Software Engineer}
+{Full time}
 {3 years}
-{October 2022 - Present | Remote} \\
+{October 2022}
+{Present}
+{Remote}\\
 {
     \raggedright
     - Lead engineer for
@@ -32,9 +51,13 @@
 }
 \medskip
 
-\ExperienceEntry{ProntoPro - Marketing Automation Specialist}
+\ExperienceEntry{ProntoPro}
+{Full Stack Software Engineer in Marketing Automation}
+{Part time}
 {7 months}
-{October 2020 - April 2021 (Part-time) | Remote} \\
+{October 2020}
+{May 2021}
+{Remote}\\
 {
     \raggedright
     - Integrated multiple marketing automation tools with an in-house MySQL database using Python, pandas, and SQLAlchemy.
@@ -43,23 +66,29 @@
 }
 \medskip
 
-\ExperienceEntry
-{ProntoPro - Marketing Automation Engineer} 
+\ExperienceEntry{ProntoPro}
+{Junior Full Stack Software Engineer in Marketing Automation} 
+{Full time}
 {11 months}
-{November 2019 - September 2021 | Milan, Italy} \\
+{November 2019}
+{October 2020}
+{Milan, Italy} \\
 {
     \raggedright
 	- Implemented data acquisition pipelines with web scraping tools into an
 	in-house MySQL database. \\
-    - Delivered a full-stack web application with Django and React used as an
+    - Delivered a Full Stack web application with Django and React used as an
     internal marketing tool.
 }
 \medskip
 
-\ExperienceEntry
-{Stadler Rail Valencia - Software Engineer}
+\ExperienceEntry{Stadler Rail Valencia}
+{Junior Software Engineer}
+{Part time}
 {6 months}
-{September 2018 - Feb 2019 (Part-time) | Valencia, Spain} \\
+{September 2018}
+{Mar 2019}
+{Valencia, Spain} \\
 {
     \raggedright
     - Developed predictive maintenance software with MATLAB, including GUI design.
